@@ -1,0 +1,121 @@
+[meta title:"Data Analysis for Statistics of Visitors to Major Tourist Attractions in South Korea" description:"Independent Study" /]
+
+[Header
+  fullWidth:true
+  title:"How to effectively use data to achieve a marketing plan in the situation of COVID-19 "
+  subtitle:"Statistics of Visitors to Major Tourist Attractions"
+  author:"Haesook Ma"
+  authorLink:"https://idyll-lang.org"
+  date:"Sep 14, 2021"
+  background:"#222222"
+  color:"#ffffff"
+   /]
+
+[var name:"x" value:0 /]
+
+## Introduction
+
+**Changes in the external management environment - COVID-19**
+
+After the first confirmed COVID-19 case on January 20, 2020, in Korea, the external management environment has completely changed. Park and Park (2020) argue that 'tourism-related sectors' are even more vulnerable to the impact of COVID-19 because of the 'lower resilience' nature of the industry. One of the main social distancing measures is discouraging people from contacting each other, but it is inevitable to have contacts between people when it comes to travel. Moreover, international travel restrictions blocked certain people's entries from certain countries (p.188). Domestic travel is no different.
+
+**New Trends in Tourism Industry in the situation of COVID-19**
+
+Since the lockdown lasts longer than a year, people began to feel tired about the restrictions and social distancing measures. The Bank of Korea (2021) points out that the people who are tired of long isolation have lost their will to follow government regulations. In the situation of COVID-19, people began to find safer ways to travel. Sung et al. (2021) explains the new trend in tourism industry that adopts a new normal environment in which people live with the pandemic. First, travelers visit outdoor tourist attractions because they have to maintain social distance and limit their movement to a minimum. Second, the pandemic paradoxically activates the domestic tourism because borders are closed.
+
+**How we could effectively use data to achieve a marketing plan**
+
+There are two main goals in this study. First is to use data to detect changes in industrial trends. Statistics of Visitors to Major Tourist Attractions provides the number of visitors to more than 4,000 tourist destinations in South Korea, and it is updated quarterly. The data can be used to track tourism trend, such as which regions are gaining popularity. Second, we can use this data to create key performance indicators. We can compare the achievement of tourist destinations with or without marketing resources. Lastly, short-term marketing plans can be changed depending on the results of trend analysis and performance analysis. If we have new market trends and resources to allocate, we can use them for short-term marketing plans. 
+
+
+
+[data name:"incheon" source:"incheon.csv" /]
+ 
+## Sample data - Incheon
+
+Source of data: Admission Statistics of Major Tourist Attractions published by [Korea Culture and Tourist Institute](https://www.kcti.re.kr/eng/user/main.do). 
+
+[Table data:incheon /]
+
+
+## The Number of Tourists in each spot
+
+
+## vega-lite chart test
+
+ 
+[data name:"incheon2" source:"incheon_test2.csv"/]
+
+[IdyllVegaLite data:incheon2 spec:`{
+  mark: "bar",
+  width:500,
+  height:400,
+  encoding: {
+    x: {
+      field: "Tourist spot (Eng)",
+      type: "nominal",
+      sort: "-y",
+      axis: {title: "Tourist Spots"}
+    },
+    y: {
+      field: "total_2020",
+      type: "quantitative",
+      axis: {title: "Number of Tourists in 2020"}
+    },
+    color :{
+      field: "Sub_category",
+      type: "nominal", 
+      axis: {title: "Sub-category"}
+    }
+  }
+}` /]
+
+
+- In this case, there will be a problem selecting multiple sub_categories.
+- One solution - Having a main sub-category + secondary sub-category (only for the analysis)
+
+
+[data name:"incheon3" source:"incheon_test3.csv"/]
+
+[IdyllVegaLite data:incheon3 spec:`{
+  mark: "bar",
+  width:500,
+  height:400,
+  encoding: {
+    x: {
+      field: "Sub_category",
+      type: "nominal",
+      sort: "-y",
+      axis: {title: "Sub_category in 2020"}
+    },
+    y: {
+      field: "Number",
+      type: "quantitative",
+      axis: {title: "Number of Tourist Spots"}
+    }
+  }
+}` /]
+
+- I will add the result of sub_category from 2018 to 2021.
+- It is possible to compare how preferences change before COVID-19 and after COVID-19.
+
+
+### Sample Analysis
+
+[data name:"incheon5" source:"incheon_test5.csv"/]
+
+
+[Table data:incheon5 /]
+
+- The table is about the total number of tourists.
+- The number of tourist spots in each category needs to be considered.
+
+
+## Reference
+
+
+* [Bank of Korea (2021). Relation between disease control measures and economic costs in a pandemic crisis](https://www.bok.or.kr/eng/bbs/E0000828/view.do?nttId=10064459&menuNo=400214)
+* De Luca, L. M., Herhausen, D., Troilo, G., & Rossi, A. (2021). How and when do big data investments pay off? The role of marketing affordances and service innovation. Journal of the Academy of Marketing Science, 49(4), 790   810.
+* Kim, N. (2017). The Trend Korea 2018. Miraebook Publishing
+* [Park, C., & Park, J. (2020). COVID-19 and the Korean Economy: When, How, and What Changes? Asian Journal of Innovation & Policy, 9(2), 187   206.](https://content.ebscohost.com/ContentServer.asp?EbscoContent=dGJyMNLr40Sep7I40dvuOLCmsEmeqK9Ssaa4TLCWxWXS&ContentCustomer=dGJyMPGut1C3rLZNuePfgeyx43zx1%2B6B&T=P&P=AN&S=R&D=bsu&K=145642460)
+* Sung, Y.-A., Kim, K.-W., & Kwon, H.-J. (2021). Big Data Analysis of Korean Travelers    Behavior in the Post-COVID-19 Era. SUSTAINABILITY, 13(1), 21 pages.
